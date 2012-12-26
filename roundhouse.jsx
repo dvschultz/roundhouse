@@ -51,7 +51,7 @@ function roundPageItem(pageItem) {
     var y1 = Math.round(pageItem.visibleBounds[0]);
     var x1 = Math.round(pageItem.visibleBounds[1]);
     var y2 = Math.ceil(pageItem.visibleBounds[2]);
-    var x2 = Math.ceil(pageItem.visibleBounds[3]);
+    var x2 = Math.round(pageItem.visibleBounds[3]);
     
     //update pageItem points
     pageItem.visibleBounds = [y1,x1,y2,x2];
