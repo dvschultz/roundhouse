@@ -32,15 +32,12 @@ function main() {
     var myPageItems = app.selection;
     
     for (var j = 0; j < myPageItems.length; j++ ) {
-
-            if (!(myPageItems[j].locked)) // Skip locked objects
-                {
-                    if (myPageItems[j].constructor.name == "TextFrame") {
-                        myPageItems[j].fit(FitOptions.frameToContent); // Fit frame to content
-                    }
-                    roundPageItem(myPageItems[j]); // Round object dimensions
-                }
-        }
+        if (!(myPageItems[j].locked)) // Skip locked objects
+            {
+                myPageItems[j].fit(FitOptions.frameToContent); // Fit frame to content
+                roundPageItem(myPageItems[j]); // Round object dimensions
+            }
+    }
     
 }
 
@@ -51,27 +48,13 @@ function roundPageItem(pageItem) {
     if (debug) alert('was:'+ pageItem.visibleBounds);
     
     //get and round all pageItem points
-    var currY1 = pageItem.visibleBounds[0];
-    var currX1 = pageItem.visibleBounds[1];
-    /*
-    var currY2 = pageItem.visibleBounds[2];
-    var currX2 = pageItem.visibleBounds[3];
-    */
-    
-    //calculate and round height and width
-    var roundW = Math.round(pageItem.visibleBounds[3] - currX1);
-    var roundH = Math.round(pageItem.visibleBounds[2] - currY1);
-    
-    //round upper left x,y
-    var newY1 = Math.round(currY1);
-    var newX1 = Math.round(currX1);
-    
-    //add rounded height and width
-    var newY2 = newY1 + roundH;
-    var newX2 = newX1 + roundW;
+    var y1 = Math.round(pageItem.visibleBounds[0]);
+    var x1 = Math.round(pageItem.visibleBounds[1]);
+    var y2 = Math.ceil(pageItem.visibleBounds[2]);
+    var x2 = Math.ceil(pageItem.visibleBounds[3]);
     
     //update pageItem points
-    pageItem.visibleBounds = [newY1,newX1,newY2,newX2];
+    pageItem.visibleBounds = [y1,x1,y2,x2];
     
     if (debug) alert('now:'+ pageItem.visibleBounds);
 }
